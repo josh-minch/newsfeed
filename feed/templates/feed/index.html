@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>NewsFeed</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'feed/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'feed/custom.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-white static-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">NewsFeed</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Log in</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container" role="main">
+        {% for article in articles %}
+        <div class="row mb-3">
+            <div class="col-md-10">
+                <div class="media">
+                    <div class="media-body align-items-start">
+                        <h5 class="mt-0 mb-0"><a href="{{ article.url }}">{{ article.title }}</a></h5>
+                        <div>{{ article.description }}</div>
+                        <small class="text-muted">{{ article.source.name }} • </small>
+                        <small class="text-muted">{{ article.publishedAt }}</small>
+                    </div>
+                    <a href="{{ article.url }}"><img class="img-thumbnail border-0 float-right" src="{% static 'feed/fish.png' %}"></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'feed/jquery/jquery.slim.min.js' %}"></script>
+    <script src="{% static 'feed/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>
