@@ -22,6 +22,7 @@ def vote(request, question_id):
 
 
 def index(request):
+    print('index')
     #newsapi = NewsApiClient(get_env_value('NEWS_API_KEY'))
     #top_headlines_response = newsapi.get_top_headlines(page_size=100)
     top_headlines_response = json.load(open('top_headlines_response.json'))
@@ -31,5 +32,11 @@ def index(request):
     for article in articles:
         article['urlToImage'] = 'fish.png'
 
-    context = {'articles': articles}
+    n_cols = 1
+    rows = []
+    for i in range(0, len(articles), n_cols):
+        row = articles[i: i + n_cols]
+        rows.append(row)
+
+    context = {'articles': rows}
     return render(request, 'feed/index.html', context)
