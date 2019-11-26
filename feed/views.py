@@ -29,10 +29,7 @@ def index(request):
     if top_headlines_response['status'] == 'ok':
         articles = top_headlines_response['articles']
 
-    for article in articles:
-        article['urlToImage'] = 'fish.png'
-
-    n_cols = 1
+    n_cols = 2
     rows = []
     for i in range(0, len(articles), n_cols):
         row = articles[i: i + n_cols]
