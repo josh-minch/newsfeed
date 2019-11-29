@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 from __future__ import absolute_import, unicode_literals
 import os
 
+from celery.schedules import crontab
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -129,3 +131,10 @@ CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
 CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_BEAT_SCHEDULE = {
+    'refresh_articles': {
+        'task': 'feed.tasks.refresh_articles',
+        'schedule': crontab(),
+    }
+}
