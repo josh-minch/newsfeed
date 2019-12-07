@@ -13,7 +13,7 @@ def index(request):
     n_cols = 2
     rows = partition_articles(articles, n_cols)
 
-    context = {'articles': rows}
+    context = {'articles': rows[:8]}
     return render(request, 'feed/index.html', context)
 
 
