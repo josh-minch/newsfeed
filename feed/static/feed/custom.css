@@ -1,19 +1,42 @@
 .navbar-brand {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
     font-family: "Bitter";
 }
 
+.title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline: none;
+    text-decoration: none;
+}
+
+.title:link {
+    color: black;
+}
+
+.title:visited {
+    color: black;
+}
+
+.title:hover {
+    background: #CDFEAA;
+    text-decoration: none;
+}
+
 h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
+    margin-top: 0rem;
+    margin-bottom: 0.2rem;
     font-family: "Bitter";
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 0.95rem;
 }
 
-.img-thumbnail {
-    max-height: 75px;
-    width: auto;
+img {
+    object-fit: cover;
+    width: 5.3rem;
+    height: 5.3rem;
 }

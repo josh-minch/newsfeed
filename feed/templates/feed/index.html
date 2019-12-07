@@ -20,7 +20,7 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-white static-top">
+    <nav class="navbar navbar-expand-sm navbar-light bg-white">
         <div class="container">
             <a class="navbar-brand" href="#">NewsFeed</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -48,18 +48,22 @@
     <!-- Page Content -->
     <div class="container" role="main">
         {% for row in articles %}
-        <div class="row mb-3">
+        <div class="row">
             {% for article in row %}
-            <div class="col-md-6">
+            <div class="col-md-6 mt-3">
                 <div class="media">
                     <div class="media-body align-items-start">
-                        <h5 class="mt-0 mb-0"><a href="{{ article.url }}">{{ article.title }}</a></h5>
+                        <h5 class=""><a class="title" href="{{ article.url }}">{{ article.title }}</a></h5>
+                        {% if article.description != None %}
                         <div>{{ article.description }}</div>
+                        {% endif %}
                         <small class="text-muted">{{ article.source }} • </small>
                         <small class="text-muted">{{ article.pub_date }}</small>
                     </div>
-                    <a href="{{ article.url }}"><img class="img-thumbnail border-0 float-right"
+                    {% if article.url_to_image != None %}
+                    <a href="{{ article.url }}"><img class="rounded ml-2 float-right"
                             src="{{ article.url_to_image }}"></a>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
