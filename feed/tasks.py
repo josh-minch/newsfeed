@@ -7,7 +7,6 @@ from newsapi import NewsApiClient
 from .models import Article
 from env import get_env_value
 
-import json
 
 n_articles = 100
 categories = ['business', 'entertainment', 'general',
