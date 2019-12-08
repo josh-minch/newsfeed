@@ -1,12 +1,14 @@
 """ Automated celery tasks that use the NewsAPI to retrive top headline articles """
 from __future__ import absolute_import, unicode_literals
-from celery import shared_task
 
+from random import shuffle
+
+from celery import shared_task
 from newsapi import NewsApiClient
 
-from .models import Article
 from env import get_env_value
 
+from .models import Article
 
 n_articles = 100
 categories = ['business', 'entertainment', 'general',
@@ -16,9 +18,11 @@ categories = ['business', 'entertainment', 'general',
 @shared_task
 def refresh_articles():
     """ Refresh database with newest articles, tagging each with their category """
+    # First clear old db entries
     Article.objects.all().delete()
 
-    articles = []
+    # Get new articles, tagging each with their respective category
+    articles = {}
     newsapi = NewsApiClient(get_env_value('NEWS_API_KEY'))
     for category in categories:
         response = newsapi.get_top_headlines(
@@ -29,12 +33,16 @@ def refresh_articles():
         articles = response['articles']
 
         for article in articles:
-            save_article(article, category)
+            article['category'] = category
 
-def save_article(article, category):
+    shuffle(articles)
+
+    for article in articles:
+        save_article(article)
+
+def save_article(article):
     article_data = extract_article_data(article)
     a = Article(**article_data)
-    a.category = category
     a.save()
 
 def extract_article_data(article):
@@ -44,6 +52,8 @@ def extract_article_data(article):
     url = article['url']
     url_to_image = article['urlToImage']
     pub_date = article['publishedAt']
+    category = article['category']
 
     return {'source': source, 'title': title, 'description': description,
-            'url': url, 'url_to_image': url_to_image, 'pub_date': pub_date}
+            'url': url, 'url_to_image': url_to_image, 'pub_date': pub_date,
+            'category': category}

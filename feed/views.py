@@ -7,8 +7,6 @@ from .models import Article
 
 def index(request):
     articles = Article.objects.all()
-    articles = list(articles)
-    shuffle(articles)
 
     n_cols = 2
     rows = partition_articles(articles, n_cols)
