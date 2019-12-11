@@ -1,7 +1,9 @@
 '''
 Celery configuration file for creating tasks
+We set the pidfile with no path because celery does not clean up the celerybeat.pid
+after it is killed
 From root folder, run beat with
-    celery -A newsfeed beat -l info
+    celery -A newsfeed beat -l info --pidfile=
 and worker with
     celery -A newsfeed worker -l info
 '''

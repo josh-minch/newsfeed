@@ -9,20 +9,19 @@ from newsapi import NewsApiClient
 from env import get_env_value
 
 from .models import Article
+from .categories import categories
 
 n_articles = 100
-categories = ['business', 'entertainment', 'general',
-                  'health', 'science', 'sports', 'technology']
-
 
 @shared_task
 def refresh_articles():
     """ Refresh database with newest articles, tagging each with their category """
-    # First clear old db entries
-    Article.objects.all().delete()
+    # Get the id of the last element that was added to db.
+    # This marks the end of the old articles that will later be deleted.
+    max_id = Article.objects.last().id
 
     # Get new articles, tagging each with their respective category
-    articles = {}
+    articles = []
     newsapi = NewsApiClient(get_env_value('NEWS_API_KEY'))
     for category in categories:
         response = newsapi.get_top_headlines(
@@ -30,15 +29,27 @@ def refresh_articles():
 
         if response['status'] != 'ok':
             continue
-        articles = response['articles']
+        category_articles = response['articles']
 
-        for article in articles:
+        for article in category_articles:
             article['category'] = category
 
-    shuffle(articles)
+        articles += category_articles
 
+    shuffle(articles)
     for article in articles:
         save_article(article)
+
+    # Delete old articles
+    Article.objects.filter(id__lte=max_id).delete()
+
+def request_articles(newsapi, category):
+    response = newsapi.get_top_headlines(
+        country='us', category=category, page_size=n_articles)
+
+    if response['status'] != 'ok':
+        return
+    return response['articles']
 
 def save_article(article):
     article_data = extract_article_data(article)
