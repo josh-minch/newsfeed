@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>NewsFeed</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'feed/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'feed/custom.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'feed:all' %}">NewsFeed</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item {% if category == '' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'feed:all' %}">All
+                            {% if category == '' %}
+                            <span class="sr-only">(current)</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item {% if category == 'general' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'feed:category' 'general' %}">General
+                            {% if category == 'general' %}
+                            <span class="sr-only">(current)</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item {% if category == 'entertainment' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'feed:category' 'entertainment' %}">Entertainment
+                            {% if category == 'entertainment' %}
+                            <span class="sr-only">(current)</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item {% if category == 'business' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'feed:category' 'business' %}">Business
+                            {% if category == 'business' %}
+                            <span class="sr-only">(current)</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item {% if category == 'health' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'feed:category' 'health' %}">Health
+                            {% if category == 'health' %}
+                            <span class="sr-only">(current)</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item {% if category == 'science' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'feed:category' 'science' %}">Science
+                            {% if category == 'science' %}
+                            <span class="sr-only">(current)</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item {% if category == 'technology' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'feed:category' 'technology' %}">Technology
+                            {% if category == 'technology' %}
+                            <span class="sr-only">(current)</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item {% if category == 'sports' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'feed:category' 'sports' %}">Sports
+                            {% if category == 'sports' %}
+                            <span class="sr-only">(current)</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/feeds">My Feeds</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Log in</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    {% block content %}{% endblock %}
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'feed/jquery/jquery.slim.min.js' %}"></script>
+    <script src="{% static 'feed/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

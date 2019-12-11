@@ -3,17 +3,19 @@ from random import shuffle
 from django.shortcuts import render
 
 from .models import Article
+from .tasks import refresh_articles
 
 
-def index(request):
-    articles = Article.objects.all()
+def articles(request, category=''):
+    if category == '':
+        articles = Article.objects.all()
+    else:
+        articles = Article.objects.filter(category=category)
 
-    n_cols = 2
-    rows = partition_articles(articles, n_cols)
+    rows = partition_articles(articles, 2)[:20]
 
-    context = {'articles': rows[:8]}
+    context = {'articles': rows, 'category': category}
     return render(request, 'feed/index.html', context)
-
 
 def partition_articles(articles, n_cols):
     rows = []

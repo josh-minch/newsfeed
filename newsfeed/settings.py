@@ -27,7 +27,7 @@ SECRET_KEY = 'uf@fky^35o&_i&0semm@jqh%(m_6bsi^%xmh8ckp3v5r^u^-g6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.62']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.62']
 
 
 # Application definition
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'newsfeed.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
