@@ -23,3 +23,7 @@ def partition_articles(articles, n_cols):
         row = articles[i: i + n_cols]
         rows.append(row)
     return rows
+
+def login(request):
+    context = {}
+    return render(request, 'feed/login.html', context)
