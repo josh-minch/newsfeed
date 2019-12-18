@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'feed.apps.FeedConfig',
+    'users.apps.UsersConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +140,5 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(),
     }
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
