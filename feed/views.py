@@ -13,8 +13,9 @@ def articles(request, category=''):
         articles = Article.objects.filter(category=category)
 
     rows = partition_articles(articles, 2)[:20]
+    title = get_title(category)
 
-    context = {'articles': rows, 'category': category}
+    context = {'articles': rows, 'category': category, 'title': title}
     return render(request, 'feed/index.html', context)
 
 def partition_articles(articles, n_cols):
@@ -27,3 +28,8 @@ def partition_articles(articles, n_cols):
 def login(request):
     context = {}
     return render(request, 'feed/login.html', context)
+
+def get_title(category):
+    if category == '':
+        return 'All feeds'
+    return category.capitalize()
