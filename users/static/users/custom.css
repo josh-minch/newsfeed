@@ -1,0 +1,10 @@
+.asteriskField {
+    display: none;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 30rem;
+    padding: 2rem 1rem 1rem 1rem;
+    margin: auto;
+}
