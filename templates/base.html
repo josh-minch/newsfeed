@@ -89,10 +89,10 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/feeds">My feeds</a>
-                    </li>
                     {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">My feeds</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                     </li>
