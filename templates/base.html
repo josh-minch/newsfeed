@@ -14,14 +14,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter">
     <!-- Bootstrap core CSS -->
     <link href="{% static 'feed/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Priority nav -->
+    <link rel="stylesheet" href="{% static 'feed/priority-nav-core.css' %}">
     <!-- Custom CSS -->
     <link href="{% static 'feed/custom.css' %}" rel="stylesheet">
     {% block css %} {% endblock %}
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container border-bottom border-gray">
             <a class="navbar-brand" href="{% url 'feed:all' %}">NewsFeed</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,22 +90,31 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/feeds">My Feeds</a>
+                        <a class="nav-link" href="/feeds">My feeds</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Sign up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">Sign up</a>
+                        <a class="nav-link" href="{% url 'login' %}">Log in</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Log in</a>
-                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
     {% if messages %}
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
+    <div class="container mt-2 mb-0 alert alert-{{ message.tags }}">
         {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     {% endfor %}
     {% endif %}
@@ -113,6 +124,13 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'feed/jquery/jquery.slim.min.js' %}"></script>
     <script src="{% static 'feed/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Priority nav JavaScript -->
+    <script async src="{% static 'feed/priority-nav.js' %}"></script>
+
+    <script>
+        var nav = priorityNav.init();
+    </script>
 
 </body>
 

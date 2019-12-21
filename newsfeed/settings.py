@@ -99,11 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -124,6 +120,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_REDIRECT_URL = 'feed:all'
+
 # Celery settings
 
 CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
@@ -137,7 +135,7 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'refresh_articles': {
         'task': 'feed.tasks.refresh_articles',
-        'schedule': crontab(),
+        'schedule': crontab(minute='*/23'),
     }
 }
 

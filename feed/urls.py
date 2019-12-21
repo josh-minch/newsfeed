@@ -10,5 +10,4 @@ category_re = r'^(?P<category>{})'.format('|'.join(categories))
 urlpatterns = [
     path('', views.articles, name='all'),
     re_path(category_re, views.articles, name='category'),
-    path('login/', views.login, name='login')
 ]

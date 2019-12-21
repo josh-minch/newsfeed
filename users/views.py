@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.contrib.auth import logout
 
 from .forms import UserRegisterForm
 
@@ -16,3 +17,8 @@ def register(request):
         form = UserRegisterForm()
     context = {'form': form}
     return render(request, 'users/register.html', context)
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, f'Account logged out.')
+    return redirect('feed:all')
