@@ -1,6 +1,11 @@
+.navbar {
+    padding-top: 0.25rem;
+    padding-bottom: 0.1rem;
+}
+
 .navbar-brand {
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 600;
     font-family: "Bitter";
 }
 
