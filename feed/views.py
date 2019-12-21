@@ -31,5 +31,5 @@ def login(request):
 
 def get_title(category):
     if category == '':
-        return 'All feeds'
+        return 'All Feeds'
     return category.capitalize()

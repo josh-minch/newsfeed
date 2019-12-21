@@ -20,5 +20,5 @@ def register(request):
 
 def logout_view(request):
     logout(request)
-    messages.success(request, f'Account logged out.')
+    messages.success(request, f"You've been logged out.")
     return redirect('feed:all')
