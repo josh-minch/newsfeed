@@ -7,5 +7,5 @@ class UserRegisterForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields['password2'].label = 'Confirm password'
 
-        self.fields['username'].help_text = 'Up to 150 characters. Letters, digits, and @ / . / + / - / _ only.'
+        self.fields['username'].help_text = 'Alphanumeric and @ / . / + / - / _ only.'
         self.fields['password2'].help_text = 'Just to be sure.'
