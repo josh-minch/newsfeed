@@ -18,7 +18,10 @@ def refresh_articles():
     """ Refresh database with newest articles, tagging each with their category """
     # Get the id of the last element that was added to db.
     # This marks the end of the old articles that will later be deleted.
-    max_id = Article.objects.last().id
+    if Article.objects.last():
+        max_id = Article.objects.last().id
+    else:
+        max_id = 0
 
     # Get new articles, tagging each with their respective category
     articles = []
