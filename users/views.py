@@ -22,3 +22,14 @@ def logout_view(request):
     logout(request)
     messages.success(request, f"You've been logged out.")
     return redirect('feed:all')
+
+
+def favorites(request):
+    if not request.user.is_authenticated:
+        return register(request)
+
+    username = request.user.username
+    articles = request.user.favorites.all()
+
+    context = {'username': username, 'articles': articles}
+    return render(request, 'users/favorites.html', context)
