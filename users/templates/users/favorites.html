@@ -9,11 +9,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="container" role="main">
+<div class="container-fluid" role="main" id="content">
     <h4 class="mt-3 mb-1"> {{ title }} </h4>
     {% for article in articles %}
     <div class="row">
-        <div class="col-md-6 mt-2">
+        <div class="col-md-8 mt-2">
             <div class="media">
                 <div class="media-body align-items-start">
                     <h5 class=""><a class="title" href="{{ article.url }}">{{ article.title }}</a></h5>
