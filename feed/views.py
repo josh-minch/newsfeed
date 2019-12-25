@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
 
 from .models import Article
@@ -19,6 +19,9 @@ def articles(request, category=''):
 
 
 def favorite_article(request, article_id):
+    if not request.user.is_authenticated:
+        return redirect('users:register')
+
     article = Article.objects.filter(id=article_id).first()
     request.user.favorites.add(article)
     messages.success(request, f"Article {article_id} favorited")
