@@ -1,18 +1,11 @@
-.navbar {
-    padding-top: 0.25rem;
-    padding-bottom: 0.1rem;
-}
-
-.navbar-brand {
+.sidebar-brand {
     font-size: 1.25rem;
     font-weight: 600;
     font-family: "Bitter";
+    color: black;
 }
 
-.title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    outline: none;
+.sidebar-brand:hover, .sidebar-brand:focus {
     text-decoration: none;
 }
 
@@ -35,13 +28,76 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Bitter";
 }
 
+.title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline: none;
+    text-decoration: none;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 img {
     object-fit: cover;
     width: 5.3rem;
     height: 5.3rem;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 10rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    transition: all 0.3s;
+    padding: 0.5rem 1rem;
+}
+
+#sidebar.active {
+    margin-left: -10rem;
+}
+
+#content {
+    width: calc(100% - 10rem);
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    left: 10rem;
+}
+
+#content.active {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -10rem;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #content {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    #content.active {
+        width: calc(100% - 10rem);
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
 }
