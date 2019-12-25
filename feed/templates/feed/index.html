@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid max-width" role="main" id="content">
+<div class="container-fluid" role="main" id="content">
 
     <div class="row">
         <div class="col mt-3 mb-1">
@@ -29,12 +29,13 @@
                     {% endif %}
                     <small class="text-muted">{{ article.source }} • </small>
                     <small class="text-muted">{{ article.pub_date }}</small>
-                    <a href="{% url 'feed:favorite_article' article_id=article.id %}" class="ml-3">Favorite</a>
+                    <a class="small text-muted" href="{% url 'feed:favorite_article' article_id=article.id %}" class="ml-3">Favorite</a>
                 </div>
                 {% if article.url_to_image != None %}
-                <a href="{{ article.url }}"><img class="rounded ml-2"
+                <a href="{{ article.url }}"><img class="rounded mt-1 ml-2"
                         src="{{ article.url_to_image }}"></a>
                 {% endif %}
+
             </div>
         </div>
         {% endfor %}
