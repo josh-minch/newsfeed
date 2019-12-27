@@ -3,20 +3,19 @@
 
 {% block content %}
 <div class="container-fluid" role="main" id="content">
-
-    <div class="row">
-        <div class="col mt-3 mb-1">
-            <h4> {{ title }} </h4>
-        </div>
-
-        <div class="col-auto mt-3 mb-1">
-            <button id="sidebarCollapse" class="sidebar-button">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="container-fluid mt-2 mb-0 alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
+    {% endfor %}
+    {% endif %}
+
+    {% include 'title-bar.html' %}
+
     {% for row in articles %}
     <div class="row">
         {% for article in row %}
@@ -28,8 +27,16 @@
                     <!-- <div>{{ article.description }}</div> -->
                     {% endif %}
                     <small class="text-muted">{{ article.source }} • </small>
-                    <small class="text-muted">{{ article.pub_date }}</small>
-                    <a class="small text-muted" href="{% url 'feed:favorite_article' article_id=article.id %}" class="ml-3">Favorite</a>
+                    <small class="text-muted">{{ article.pub_date }} • </small>
+                    {% if article.favorited %}
+                    <a class="small text-muted" href="{% url 'feed:favorite_article' article_id=article.id %}" class="ml-3">
+                        unfavorite
+                    </a>
+                    {% else %}
+                    <a class="small text-muted" href="{% url 'feed:favorite_article' article_id=article.id %}" class="ml-3">
+                        favorite
+                    </a>
+                    {% endif %}
                 </div>
                 {% if article.url_to_image != None %}
                 <a href="{{ article.url }}"><img class="rounded mt-1 ml-2"

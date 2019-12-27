@@ -1,3 +1,13 @@
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0rem;
+    margin-bottom: 0.2rem;
+    font-family: "Bitter";
+}
+
+body {
+    font-size: 1rem;
+}
+
 .sidebar-brand {
     font-size: 1.25rem;
     font-weight: 600;
@@ -7,6 +17,14 @@
 }
 
 .sidebar-brand:hover, .sidebar-brand:focus {
+    text-decoration: none;
+    color: black;
+}
+
+.title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline: none;
     text-decoration: none;
 }
 
@@ -21,23 +39,6 @@
 .title:hover {
     background: #CDFEAA;
     text-decoration: none;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 0rem;
-    margin-bottom: 0.2rem;
-    font-family: "Bitter";
-}
-
-.title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    outline: none;
-    text-decoration: none;
-}
-
-body {
-    font-size: 1rem;
 }
 
 img {
@@ -69,8 +70,11 @@ img {
 
 #sidebarCollapse {
     width: 40px;
-    height: 40px;
+    height: 20px;
     background: white;
+    border: none;
+    background: none;
+    outline: 0;
 }
 
 #sidebarCollapse span {

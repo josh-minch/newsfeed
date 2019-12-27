@@ -11,7 +11,9 @@ def articles(request, category=''):
     else:
         articles = Article.objects.filter(category=category)
 
-    rows = partition_articles(articles, 2)[:20]
+    if request.user.is_authenticated:
+        set_if_favorite(request, articles)
+    rows = partition_articles(articles, 2)[:8]
     title = get_title(category)
 
     context = {'articles': rows, 'category': category, 'title': title}
@@ -20,13 +22,20 @@ def articles(request, category=''):
 
 def favorite_article(request, article_id):
     if not request.user.is_authenticated:
-        return redirect('users:register')
+        return redirect('users:login')
 
     article = Article.objects.filter(id=article_id).first()
-    request.user.favorites.add(article)
-    messages.success(request, f"Article {article_id} favorited")
+    if request.user.favorites.filter(id=article_id).exists():
+        request.user.favorites.remove(article)
+    else:
+        request.user.favorites.add(article)
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+def set_if_favorite(request, articles):
+    for article in articles:
+        if article in set(request.user.favorites.all()):
+            article.favorited = True
 
 def partition_articles(articles, n_cols):
     rows = []
