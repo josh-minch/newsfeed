@@ -118,7 +118,7 @@ img {
 }
 
 @media (min-width: 768px) {
-    .sidebar-button {
+    #sidebarCollapse {
         display: none;
     }
 }
