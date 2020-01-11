@@ -29,13 +29,13 @@
                     <small class="text-muted">{{ article.source }} • </small>
                     <small class="text-muted">{{ article.pub_date }} • </small>
                     {% if article.favorited %}
-                    <a class="small text-muted" href="{% url 'feed:favorite_article' article_id=article.id %}" class="ml-3">
+                    <button id="favorite" class="small text-muted" type="button" data="{{article.id}}">
                         unfavorite
-                    </a>
+                    </button>
                     {% else %}
-                    <a class="small text-muted" href="{% url 'feed:favorite_article' article_id=article.id %}" class="ml-3">
+                    <button id="favorite" class="small text-muted" type="button" data="{{article.id}}">
                         favorite
-                    </a>
+                    </button>
                     {% endif %}
                 </div>
                 {% if article.url_to_image != None %}

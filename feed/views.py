@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 
 from .models import Article
@@ -20,17 +21,17 @@ def articles(request, category=''):
     return render(request, 'feed/index.html', context)
 
 
+@login_required
 def favorite_article(request, article_id):
-    if not request.user.is_authenticated:
-        return redirect('users:login')
-
     article = Article.objects.filter(id=article_id).first()
     if request.user.favorites.filter(id=article_id).exists():
         request.user.favorites.remove(article)
+        is_favorited = False
     else:
         request.user.favorites.add(article)
+        is_favorited = True
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponse(is_favorited)
 
 def set_if_favorite(request, articles):
     for article in articles:
