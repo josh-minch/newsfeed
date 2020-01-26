@@ -8,13 +8,14 @@ from .tasks import refresh_articles
 
 def articles(request, category=''):
     if category == '':
-        articles = Article.objects.all()
+        articles = Article.objects.all().order_by('-pub_date').exclude(category='general')
     else:
-        articles = Article.objects.filter(category=category)
+        articles = Article.objects.filter(
+            category=category).order_by('-pub_date')
 
     if request.user.is_authenticated:
         set_if_favorite(request, articles)
-    rows = partition_articles(articles, 2)[:8]
+    rows = partition_articles(articles, 2)[:20]
     title = get_title(category)
 
     context = {'articles': rows, 'category': category, 'title': title}
