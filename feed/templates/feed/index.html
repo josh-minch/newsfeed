@@ -23,10 +23,6 @@
             <div class="media">
                 <div class="media-body">
                     <h5 class=""><a class="title" href="{{ article.url }}">{{ article.title }}</a></h5>
-                    {% if article.description != None %}
-                    <!-- <div>{{ article.description }}</div> -->
-                    {% endif %}
-                    <small class="text-muted">{{ article.source }} • </small>
                     <small class="text-muted">{{ article.pub_date }} • </small>
                     {% if article.favorited %}
                     <button id="favorite" class="small text-muted" type="button" data="{{article.id}}">
