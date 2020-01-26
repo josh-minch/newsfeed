@@ -16,13 +16,6 @@ n_articles = 100
 @shared_task
 def refresh_articles():
     """ Refresh database with newest articles, tagging each with their category """
-    # Get the id of the last element that was added to db.
-    # This marks the end of the old articles that will later be deleted.
-    if Article.objects.last():
-        max_id = Article.objects.last().id
-    else:
-        max_id = 0
-
     # Get new articles, tagging each with their respective category
     articles = []
     newsapi = NewsApiClient(get_env_value('NEWS_API_KEY'))
@@ -39,12 +32,9 @@ def refresh_articles():
 
         articles += category_articles
 
-    shuffle(articles)
     for article in articles:
         save_article(article)
 
-    # Delete old articles
-    Article.objects.filter(id__lte=max_id).delete()
 
 def request_articles(newsapi, category):
     response = newsapi.get_top_headlines(
