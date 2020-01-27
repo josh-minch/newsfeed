@@ -25,11 +25,11 @@
                     <h5 class=""><a class="title" href="{{ article.url }}">{{ article.title }}</a></h5>
                     <small class="text-muted">{{ article.pub_date }} • </small>
                     {% if article.favorited %}
-                    <button id="favorite" class="small text-muted" type="button" data="{{article.id}}">
+                    <button class="small text-muted favorite" type="button" data="{{article.id}}">
                         unfavorite
                     </button>
                     {% else %}
-                    <button id="favorite" class="small text-muted" type="button" data="{{article.id}}">
+                    <button class="small text-muted favorite" type="button" data="{{article.id}}">
                         favorite
                     </button>
                     {% endif %}

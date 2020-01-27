@@ -52,6 +52,17 @@ img {
     width: 100%;
 }
 
+button.favorite {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+button.favorite:hover {
+    text-decoration: underline;
+}
+
 #sidebar {
     width: 10rem;
     height: 100vh;
