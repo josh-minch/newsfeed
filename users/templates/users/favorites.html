@@ -5,7 +5,8 @@
 <title>NewsFeed - Favorites</title>
 {% endblock %}
 
-{% block css %}
+{% block scripts %}
+<script src="{% static 'users/favorite.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -17,7 +18,7 @@
             <p><a class="" href="{{ article.url }}">{{ article.title }}</a></p>
         </div>
         <div class="col">
-            <button class="text-muted favorite" type="button" data="{{article.id}}">
+            <button class="favorite btn btn-danger" type="button" data="{{article.id}}">
                 unfavorite
             </button>
         </div>
