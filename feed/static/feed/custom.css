@@ -8,6 +8,23 @@ body {
     font-size: 1rem;
 }
 
+img {
+    object-fit: cover;
+    width: 5.3rem;
+    height: 5.3rem;
+}
+
+button.favorite {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+button.favorite:hover {
+    text-decoration: underline;
+}
+
 .sidebar-brand {
     font-size: 1.25rem;
     font-weight: 600;
@@ -41,26 +58,9 @@ body {
     text-decoration: none;
 }
 
-img {
-    object-fit: cover;
-    width: 5.3rem;
-    height: 5.3rem;
-}
-
 .wrapper {
     display: flex;
     width: 100%;
-}
-
-button.favorite {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-button.favorite:hover {
-    text-decoration: underline;
 }
 
 #sidebar {
