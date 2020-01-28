@@ -14,11 +14,11 @@
     {% include 'title-bar.html' %}
     {% for article in articles %}
     <div class="row">
-        <div class="col">
+        <div class="col col-lg-7">
             <p><a class="" href="{{ article.url }}">{{ article.title }}</a></p>
         </div>
-        <div class="col">
-            <button class="favorite btn btn-danger" type="button" data="{{article.id}}">
+        <div class="col-auto">
+            <button class="favorite btn btn-sm btn-danger" type="button" data="{{article.id}}">
                 unfavorite
             </button>
         </div>
