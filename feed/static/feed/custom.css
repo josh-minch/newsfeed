@@ -14,14 +14,14 @@ img {
     height: 5.3rem;
 }
 
-button.favorite {
+button.button-link {
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
 }
 
-button.favorite:hover {
+button.button-link:hover {
     text-decoration: underline;
 }
 
