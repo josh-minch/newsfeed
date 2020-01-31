@@ -54,8 +54,7 @@ button.button-link:hover {
 }
 
 .title:hover {
-    background: #CDFEAA;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .wrapper {
