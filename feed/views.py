@@ -1,6 +1,8 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.shortcuts import (HttpResponse, HttpResponseRedirect, redirect,
+                              render)
 
 from .models import Article
 from .tasks import refresh_articles
@@ -15,10 +17,14 @@ def articles(request, category=''):
 
     if request.user.is_authenticated:
         set_if_favorite(request, articles)
-    rows = partition_articles(articles, 2)[:20]
-    title = get_title(category)
+    rows = partition_articles(articles, 2)
 
-    context = {'articles': rows, 'category': category, 'title': title}
+    paginator = Paginator(rows, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    title = get_title(category)
+    context = {'category': category, 'title': title, 'page_obj': page_obj}
     return render(request, 'feed/index.html', context)
 
 
