@@ -3,11 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import (HttpResponse, HttpResponseRedirect, redirect,
                               render)
+from django.views.decorators.cache import never_cache
 
 from .models import Article
 from .tasks import refresh_articles
 
-
+@never_cache
 def articles(request, category=''):
     if category == '':
         articles = Article.objects.all().order_by('-pub_date').exclude(category='general')
