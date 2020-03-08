@@ -58,8 +58,7 @@ button.button-link:hover {
 }
 
 .wrapper {
-    display: flex;
-    width: 100%;
+    display: block;
 }
 
 #sidebar {
@@ -69,9 +68,36 @@ button.button-link:hover {
     top: 0;
     left: 0;
     z-index: 999;
-    transition: all 0.3s;
+    background: white;
     padding-left: 1rem;
     padding-top: 1rem;
+    transition: all 0.3s;
+}
+
+.overlay {
+    visibility: hidden;
+    position: fixed;
+    /* full screen */
+    width: 100vw;
+    height: 100vh;
+    /* transparent black */
+    background: rgb(0, 0, 0);
+    /* middle layer, i.e. appears below the sidebar */
+    z-index: 998;
+    opacity: 0;
+}
+
+/* display .overlay when it has the .active class */
+
+.overlay.active {
+    visibility: visible;
+    opacity: 0.7;
+}
+
+.opacity-transition {
+    transition-property: visibility, opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
 }
 
 #sidebar.active {
@@ -130,6 +156,13 @@ button.button-link:hover {
 @media (min-width: 768px) {
     #sidebarCollapse {
         display: none;
+    }
+    #sidebar.active {
+        margin-left: 0rem;
+    }
+    .overlay.active {
+        visibility: hidden;
+        opacity: 0;
     }
 }
 

@@ -33,9 +33,19 @@
     <!-- For sidebar -->
     <script type="text/javascript">
         $(document).ready(function () {
+            $('.overlay').on('click', function () {
+                // hide sidebar
+                $('#sidebar').removeClass('active');
+                // hide overlay
+                $('.overlay').removeClass('active');
+                $('#sidebarCollapse').toggleClass('active');
+            });
+
             $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $('#content').toggleClass('active');
+                // open sidebar
+                $('#sidebar').addClass('active');
+                // fade in the overlay
+                $('.overlay').addClass('active');
                 $(this).toggleClass('active');
             });
         });
@@ -134,6 +144,8 @@
         {% block content %}{% endblock %}
     </div>
 
+    <!-- Overlay element -->
+    <div class="overlay opacity-transition"></div>
 </body>
 
 </html>
