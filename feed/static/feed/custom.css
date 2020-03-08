@@ -74,17 +74,28 @@ button.button-link:hover {
     transition: all 0.3s;
 }
 
+#content {
+    width: calc(100% - 10rem);
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    left: 10rem;
+}
+
+#content.active {
+    width: 100%;
+}
+
 .overlay {
     visibility: hidden;
+    opacity: 0;
     position: fixed;
-    /* full screen */
     width: 100vw;
     height: 100vh;
-    /* transparent black */
     background: rgb(0, 0, 0);
     /* middle layer, i.e. appears below the sidebar */
     z-index: 998;
-    opacity: 0;
 }
 
 /* display .overlay when it has the .active class */
@@ -97,11 +108,7 @@ button.button-link:hover {
 .opacity-transition {
     transition-property: visibility, opacity;
     transition-duration: 0.3s;
-    transition-timing-function: ease-in-out;
-}
-
-#sidebar.active {
-    margin-left: -10rem;
+    transition-timing-function: cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 
 #sidebarCollapse {
@@ -122,35 +129,32 @@ button.button-link:hover {
     transition: all 0.3s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 
-#sidebarCollapse span:first-of-type {
-    transform: rotate(45deg) translate(2px, 2px);
-}
-
-#sidebarCollapse span:nth-of-type(2) {
-    opacity: 0;
-}
-
-#sidebarCollapse span:last-of-type {
-    transform: rotate(-45deg) translate(1px, -1px);
-}
-
 #sidebarCollapse.active span {
     transform: none;
     opacity: 1;
     margin: 5px auto;
 }
 
-#content {
-    width: calc(100% - 10rem);
-    min-height: 100vh;
-    transition: all 0.3s;
-    position: absolute;
-    top: 0;
-    left: 10rem;
+#sidebarCollapse span:first-of-type, #sidebarCollapse span:nth-of-type(2), #sidebarCollapse span:last-of-type {
+    transform: none;
+    opacity: 1;
+    margin: 5px auto;
 }
 
-#content.active {
-    width: 100%;
+#sidebarCollapse.active span {
+    margin: 0 auto;
+}
+
+#sidebarCollapse.active span:first-of-type {
+    transform: rotate(45deg) translate(2px, 2px);
+}
+
+#sidebarCollapse.active span:nth-of-type(2) {
+    opacity: 0;
+}
+
+#sidebarCollapse.active span:last-of-type {
+    transform: rotate(-45deg) translate(1px, -1px);
 }
 
 @media (min-width: 768px) {
@@ -186,22 +190,5 @@ button.button-link:hover {
         position: absolute;
         top: 0;
         left: 10rem;
-    }
-    #sidebarCollapse span:first-of-type, #sidebarCollapse span:nth-of-type(2), #sidebarCollapse span:last-of-type {
-        transform: none;
-        opacity: 1;
-        margin: 5px auto;
-    }
-    #sidebarCollapse.active span {
-        margin: 0 auto;
-    }
-    #sidebarCollapse.active span:first-of-type {
-        transform: rotate(45deg) translate(2px, 2px);
-    }
-    #sidebarCollapse.active span:nth-of-type(2) {
-        opacity: 0;
-    }
-    #sidebarCollapse.active span:last-of-type {
-        transform: rotate(-45deg) translate(1px, -1px);
     }
 }
