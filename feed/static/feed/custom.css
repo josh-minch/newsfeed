@@ -87,6 +87,10 @@ button.button-link:hover {
     width: 100%;
 }
 
+.visuallyhidden {
+    display: none;
+}
+
 #overlay {
     visibility: hidden;
     opacity: 0;
