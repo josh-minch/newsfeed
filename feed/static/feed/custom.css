@@ -110,7 +110,7 @@ button.button-link:hover {
 .opacity-transition {
     transition-property: visibility, opacity;
     transition-duration: 0.3s;
-    transition-timing-function: cubic-bezier(0.810, -0.330, 0.345, 1.375);
+    transition-timing-function: ease-in-out;
 }
 
 #sidebarCollapse {
