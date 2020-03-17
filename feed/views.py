@@ -11,7 +11,7 @@ from .tasks import refresh_articles
 @never_cache
 def articles(request, category=''):
     if category == '':
-        articles = Article.objects.all().order_by('-pub_date').exclude(category='general')
+        articles = Article.objects.all().order_by('-pub_date')
     else:
         articles = Article.objects.filter(
             category=category).order_by('-pub_date')
@@ -24,8 +24,11 @@ def articles(request, category=''):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    title = get_title(category)
-    context = {'category': category, 'title': title, 'page_obj': page_obj}
+    wide_title, narrow_title = get_titles(category)
+    context = {'category': category,
+               'wide_title': wide_title,
+               'narrow_title': narrow_title,
+               'page_obj': page_obj}
     return render(request, 'feed/index.html', context)
 
 
@@ -53,7 +56,7 @@ def partition_articles(articles, n_cols):
         rows.append(row)
     return rows
 
-def get_title(category):
+def get_titles(category):
     if category == '':
-        return 'All Feeds'
-    return category.capitalize()
+        return 'All Feeds', 'Newsfeed'
+    return category.capitalize(), category.capitalize()

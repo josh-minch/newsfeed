@@ -57,6 +57,10 @@ button.button-link:hover {
     text-decoration: underline;
 }
 
+.narrow-text {
+    display: none;
+}
+
 .wrapper {
     display: block;
 }
@@ -184,5 +188,11 @@ button.button-link:hover {
         position: absolute;
         top: 0;
         left: 10rem;
+    }
+    .wide-text {
+        display: none;
+    }
+    .narrow-text {
+        display: inline-block;
     }
 }
