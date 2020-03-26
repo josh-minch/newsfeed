@@ -5,13 +5,13 @@ from datetime import datetime
 from random import shuffle
 
 from celery import shared_task
+from django.utils import timezone
 from newsapi import NewsApiClient
 
 from env import get_env_value
 
 from .categories import categories
 from .models import Article
-
 
 n_articles = 100
 
@@ -25,7 +25,7 @@ def refresh_articles():
     if not ordered_articles:
         datetime_cutoff = datetime.today().replace(tzinfo=None)
     else:
-        datetime_cutoff = ordered_articles[0].pub_date.replace(tzinfo=None)
+        datetime_cutoff = ordered_articles[0].pub_date.replace(tzinfo=timezone.utc)
 
     articles = []
     newsapi = NewsApiClient(get_env_value('NEWS_API_KEY'))
@@ -53,7 +53,7 @@ def refresh_articles():
 
 def get_article_datetime(article):
     datetime_str = article['publishedAt']
-    return datetime.strptime(datetime_str, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=None)
+    return datetime.strptime(datetime_str, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
 
 def request_articles(newsapi, category):
     response = newsapi.get_top_headlines(
