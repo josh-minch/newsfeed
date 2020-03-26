@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block scripts %}
 <script src="{% static 'feed/favorite.js' %}"></script>
@@ -27,7 +28,7 @@
             <div class="media">
                 <div class="media-body">
                     <h5 class=""><a class="title" href="{{ article.url }}">{{ article.title }}</a></h5>
-                    <small class="text-muted">{{ article.pub_date }} • </small>
+                    <small class="text-muted">{{ article.pub_date|naturaltime }} • </small>
                     {% if article.favorited %}
                     <button class="small text-muted favorite button-link" type="button" data="{{article.id}}">
                         unfavorite
