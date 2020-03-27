@@ -38,5 +38,5 @@ def favorites(request):
     articles = request.user.favorites.all()
     title = 'Favorites'
 
-    context = {'title': title, 'username': username, 'articles': articles}
+    context = {'wide_title': title, 'narrow_title': title, 'username': username, 'articles': articles}
     return render(request, 'users/favorites.html', context)
