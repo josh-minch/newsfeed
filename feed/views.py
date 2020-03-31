@@ -57,6 +57,6 @@ def partition_articles(articles, n_cols):
     return rows
 
 def get_titles(category):
-    if category == '':
-        return 'All Feeds', 'Newsfeed'
+    if category == 'general':
+        return 'General', 'Newsfeed'
     return category.capitalize(), category.capitalize()
