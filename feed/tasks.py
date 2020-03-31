@@ -52,7 +52,7 @@ def get_datetime_cutoff():
 
     # If database is empty, start cutoff to this morning
     if not ordered_articles:
-        return datetime.today().replace(hour=0, minute=0, second=0, tzinfo=None)
+        return datetime.today().replace(hour=0, minute=0, second=0, tzinfo=timezone.utc)
     else:
         return ordered_articles[0].pub_date.replace(tzinfo=timezone.utc)
 
