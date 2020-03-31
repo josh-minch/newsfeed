@@ -17,7 +17,7 @@ def register(request):
                                     password=form.cleaned_data['password1'],
                                     )
             login(request, new_user)
-            return redirect('feed:all')
+            return redirect('feed:frontpage')
     else:
         form = UserRegisterForm()
     context = {'form': form}
@@ -27,7 +27,7 @@ def register(request):
 def logout_view(request):
     logout(request)
     messages.success(request, f"You've been logged out.")
-    return redirect('feed:all')
+    return redirect('feed:frontpage')
 
 
 def favorites(request):
