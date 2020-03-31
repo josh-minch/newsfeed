@@ -9,12 +9,9 @@ from .models import Article
 from .tasks import refresh_articles
 
 @never_cache
-def articles(request, category=''):
-    if category == '':
-        articles = Article.objects.all().order_by('-pub_date')
-    else:
-        articles = Article.objects.filter(
-            category=category).order_by('-pub_date')
+def articles(request, category='general'):
+    articles = Article.objects.filter(
+        category=category).order_by('-pub_date')
 
     if request.user.is_authenticated:
         set_if_favorite(request, articles)

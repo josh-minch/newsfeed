@@ -39,7 +39,7 @@
     <div class="wrapper">
         <!-- Sidebar -->
         <nav class="navbar-light" id="sidebar">
-            <a class="sidebar-brand" href="{% url 'feed:category' 'general' %}">NewsFeed</a>
+            <a class="sidebar-brand" href="{% url 'feed:frontpage' %}">NewsFeed</a>
             <ul class="navbar-nav">
                 <li class="nav-item {% if category == 'entertainment' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'feed:category' 'entertainment' %}">Entertainment

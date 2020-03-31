@@ -8,7 +8,7 @@ app_name = 'feed'
 category_re = r'^(?P<category>{})'.format('|'.join(categories))
 
 urlpatterns = [
-    path('', views.articles, name='all'),
+    path('', views.articles, name='frontpage'),
     re_path(category_re, views.articles, name='category'),
     path('favorite_article/<int:article_id>/',
             views.favorite_article, name='favorite_article'),
