@@ -14,6 +14,8 @@ import os
 
 from celery.schedules import crontab
 
+from env import get_env_value
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -81,6 +83,14 @@ WSGI_APPLICATION = 'newsfeed.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'newsfeed',
+        'USER': 'postgres',
+        'PASSWORD': get_env_value('DB_PASSWORD'),
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    },
+    'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
@@ -123,10 +133,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'feed:all'
+LOGIN_REDIRECT_URL = 'feed:frontpage'
 
 # Celery settings
-
 CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
 
 #: Only add pickle to this list if your broker is secured
@@ -138,8 +147,9 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'refresh_articles': {
         'task': 'feed.tasks.refresh_articles',
-        'schedule': crontab(minute='*/23'),
+        'schedule': crontab(minute='*/1'),
     }
 }
 
+# Crispy settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

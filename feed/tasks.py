@@ -28,7 +28,9 @@ def refresh_articles():
             country='us', category=category, page_size=n_articles)
 
         if response['status'] != 'ok':
+            print_error(response)
             continue
+
         all_response_articles = response['articles']
 
         # Filter out old articles to avoid saving duplicates to database
@@ -44,6 +46,10 @@ def refresh_articles():
 
     for article in articles:
         save_article(article)
+
+def print_error(response):
+    print(response['code'])
+    print(response['message'])
 
 def get_datetime_cutoff():
     """ Get datetime of last published article, so we know which articles are new and which
