@@ -17,15 +17,9 @@ n_articles = 100
 
 @shared_task
 def refresh_articles():
-    """ Refresh database with newest articles, tagging each with their category """
-    # Get datetime of last published article, so we know which articles are new and which
-    # have already been saved to database. We replace the timezone data with None because
-    # all articles are in UTC time, but the UTC flag type differs between Django and NewsAPI
-    ordered_articles = Article.objects.all().order_by('-pub_date')
-    if not ordered_articles:
-        datetime_cutoff = datetime.today().replace(tzinfo=None)
-    else:
-        datetime_cutoff = ordered_articles[0].pub_date.replace(tzinfo=timezone.utc)
+    """ Refresh database with newest articles after a datetime cutoff,
+    tagging each with their category. """
+    datetime_cutoff = get_datetime_cutoff()
 
     articles = []
     newsapi = NewsApiClient(get_env_value('NEWS_API_KEY'))
@@ -50,6 +44,17 @@ def refresh_articles():
 
     for article in articles:
         save_article(article)
+
+def get_datetime_cutoff():
+    """ Get datetime of last published article, so we know which articles are new and which
+    have already been saved to database. """
+    ordered_articles = Article.objects.all().order_by('-pub_date')
+
+    # If database is empty, start cutoff to this morning
+    if not ordered_articles:
+        return datetime.today().replace(hour=0, minute=0, second=0, tzinfo=None)
+    else:
+        return ordered_articles[0].pub_date.replace(tzinfo=timezone.utc)
 
 def get_article_datetime(article):
     datetime_str = article['publishedAt']
