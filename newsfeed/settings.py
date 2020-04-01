@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'newsfeed',
         'USER': 'postgres',
         'PASSWORD': get_env_value('DB_PASSWORD'),
-        'HOST': '127.0.0.1',
+        'HOST': 'jm-newsfeed.herokuapp.com',
         'PORT': '5432',
     },
     'sqlite': {
