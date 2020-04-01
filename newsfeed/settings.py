@@ -28,7 +28,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = get_env_value('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_env_value('DEBUG_VALUE')
+# Hacky Python comparison to the string 'True' because
+# any non-empty string in Python is truthy
+DEBUG = (get_env_value('DEBUG_VALUE') == 'True')
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1',
                  '192.168.1.62', 'jm-newsfeed.herokuapp.com']
