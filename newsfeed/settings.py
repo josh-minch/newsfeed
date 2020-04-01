@@ -157,5 +157,4 @@ CELERY_BEAT_SCHEDULE = {
 # Crispy settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
 django_heroku.settings(locals())
