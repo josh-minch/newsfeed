@@ -141,7 +141,7 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'feed:frontpage'
 
 # Celery settings
-CELERY_BROKER_URL = get_env_value('CLOUDAMQP_URL')
+CELERY_BROKER_URL = get_env_value('REDIS_URL')
 
 #: Only add pickle to this list if your broker is secured
 #: from unwanted access (see userguide/security.html)
