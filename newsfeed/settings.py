@@ -145,7 +145,7 @@ CELERY_BROKER_URL = get_env_value('CLOUDAMQP_URL')
 
 #: Only add pickle to this list if your broker is secured
 #: from unwanted access (see userguide/security.html)
-CELERY_RESULT_BACKEND = get_env_value('CLOUDAMQP_URL')
+CELERY_RESULT_BACKEND = get_env_value('REDIS_URL')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
@@ -158,5 +158,13 @@ CELERY_BEAT_SCHEDULE = {
 
 # Crispy settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Redis
+CACHES = {
+    "default": {
+        "BACKEND": "redis_cache.RedisCache",
+        "LOCATION": os.environ.get('REDIS_URL'),
+    }
+}
 
 django_heroku.settings(locals())
