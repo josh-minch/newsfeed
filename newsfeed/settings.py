@@ -155,7 +155,8 @@ CELERY_WORKER_MAX_TASKS_PER_CHILD = 500
 CELERY_BEAT_SCHEDULE = {
     'refresh_articles': {
         'task': 'feed.tasks.refresh_articles',
-        'schedule': crontab(minute='*/23'),
+        'schedule': crontab(hour='*',
+                            minute='0, 30'),
     }
 }
 
