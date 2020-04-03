@@ -149,6 +149,9 @@ CELERY_RESULT_BACKEND = get_env_value('REDIS_URL')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
+# Set to prevent workers from shutting down after executing several tasks
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 500
+
 CELERY_BEAT_SCHEDULE = {
     'refresh_articles': {
         'task': 'feed.tasks.refresh_articles',
