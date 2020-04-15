@@ -65,6 +65,15 @@ button.button-link:hover {
     display: block;
 }
 
+.dark-link{
+    color: gray;
+}
+
+.nav-item-justify-bottom {
+    position: absolute;
+    bottom: 0.5rem;
+}
+
 #sidebar {
     width: 10rem;
     height: 100vh;

@@ -40,7 +40,7 @@
         <!-- Sidebar -->
         <nav class="navbar-light" id="sidebar">
             <a class="sidebar-brand" href="{% url 'feed:frontpage' %}">NewsFeed</a>
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item {% if category == 'entertainment' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'feed:category' 'entertainment' %}">Entertainment
                         {% if category == 'entertainment' %}
@@ -103,7 +103,9 @@
                     <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
                 </li>
                 {% endif %}
-            </ul>
+                <li class="nav-item nav-item-justify-bottom">
+                    <a class="nav-link" href="https://newsapi.org"><div class="dark-link">powered by</div>NewsAPI.org</a>
+                </li>
         </nav>
 
 
