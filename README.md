@@ -4,9 +4,9 @@ A responsive news reader project. Users can browse by category, register an acco
 ### Made with
 * [Python 3.8](https://www.python.org/downloads/)
 * [Django](https://www.djangoproject.com/)
-* [Bootstrap](https://getbootstrap.com/.org) - UI library
-* [PostgreSQL](https://www.postgresql.org/) - Database
-* [Celery](celeryproject.org) - Asynchronous task queue scheduler
+* [Bootstrap](https://getbootstrap.com/.org) - Responsive UI library
+* [PostgreSQL](https://www.postgresql.org/) - Relational database
+* [Celery](https://docs.celeryproject.org/en/stable/) - Asynchronous task queue scheduler
 * [Redis](https://redis.io/) - Acting as a broker for Celery
 * [NewsAPI](https://newsapi.org/) - JSON API for live news data
 * Demo hosted on [Heroku](https://www.heroku.com/platform) - Cloud application platform
