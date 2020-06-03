@@ -9,7 +9,9 @@ A responsive news reader project. Users can browse by category, register an acco
 * [Celery](https://docs.celeryproject.org/en/stable/) - Asynchronous task queue scheduler
 * [Redis](https://redis.io/) - Acting as a broker for Celery
 * [NewsAPI](https://newsapi.org/) - JSON API for live news data
-* Demo hosted on [Heroku](https://www.heroku.com/platform) - Cloud application platform
+
+### Demo
+[Demo](https://jm-newsfeed.herokuapp.com/) hosted on [Heroku](https://www.heroku.com/platform), a cloud application platform.
 
 ### Legal
 This project includes open source software licensed under the MIT License. In compliance with this license, all copies and substantial portions of the licensed software retains the original copyright and license notices.
