@@ -26,7 +26,7 @@ def refresh_articles():
     newsapi = NewsApiClient(get_env_value('NEWS_API_KEY'))
     for category in categories:
         response = newsapi.get_top_headlines(
-            n_country='us', category=category, page_size=article_request)
+            n_country='us', category=category, page_size=n_article_request)
 
         if response['status'] != 'ok':
             print_error(response)
