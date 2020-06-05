@@ -55,7 +55,7 @@ def delete_oldest_articles():
     Therefore, we must periodically remove the oldest articles from our database
     to accomodate this limitation
     """
-    articles = Article.objects.all().order_by('pub_date')[article_db_limit:]
+    articles = Article.objects.all().order_by('-pub_date')[article_db_limit:]
 
     for article in articles:
         article.delete()
