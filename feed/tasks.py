@@ -13,7 +13,8 @@ from env import get_env_value
 from .categories import categories
 from .models import Article
 
-n_articles = 100
+n_article_request = 100
+article_db_limit = 7500
 
 @shared_task
 def refresh_articles():
@@ -25,7 +26,7 @@ def refresh_articles():
     newsapi = NewsApiClient(get_env_value('NEWS_API_KEY'))
     for category in categories:
         response = newsapi.get_top_headlines(
-            country='us', category=category, page_size=n_articles)
+            n_country='us', category=category, page_size=article_request)
 
         if response['status'] != 'ok':
             print_error(response)
@@ -46,6 +47,18 @@ def refresh_articles():
 
     for article in articles:
         save_article(article)
+
+
+@shared_task
+def delete_oldest_articles():
+    """ Our free hosting plan limits our data storage to 10,000 records
+    Therefore, we must periodically remove the oldest articles from our database
+    to accomodate this limitation
+    """
+    articles = Article.objects.all().order_by('pub_date')[article_db_limit:]
+
+    for article in articles:
+        article.delete()
 
 def print_error(response):
     print(response['code'])
@@ -91,3 +104,5 @@ def extract_article_data(article):
     return {'source': source, 'title': title, 'description': description,
             'url': url, 'url_to_image': url_to_image, 'pub_date': pub_date,
             'category': category}
+
+

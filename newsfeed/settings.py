@@ -149,6 +149,11 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'feed.tasks.refresh_articles',
         'schedule': crontab(hour='*',
                             minute='0, 30'),
+    },
+    'delete_oldest_articles': {
+        'task': 'feed.tasks.delete_oldest_articles',
+        'schedule': crontab(hour='*',
+                            minute='0, 30'),
     }
 }
 
